@@ -14,5 +14,7 @@ addition, we offer a nice builder API to significantly simplify the creation of 
 when using the JVM language Xtend[2].
 
 Links:
+
 [1] www.xtext.org
+
 [2] www.xtend-lang.org
