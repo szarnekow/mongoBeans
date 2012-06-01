@@ -1,0 +1,37 @@
+import java.util.*
+
+package org.musicdb {
+	/**
+	 * A musical performer
+	 */
+	mongobean Artist {
+		String name
+		Album* albums
+		
+		def Iterable<Track> getAllTracks() {
+			albums.map[tracks].flatten
+		}
+	}  
+	 
+	/**
+	 * A record, CD, DVD or another collection of tracks
+	 */
+	mongobean Album {
+		String title
+		int year 
+		Track* tracks
+		
+		def int getDuration() {
+			tracks.map[duration].reduce[int a, int b| a + b]
+		}
+	}
+	
+	mongobean Track {
+		String title
+		/**
+		 * the duration in seconds
+		 */
+		int duration
+	}
+	
+} 
