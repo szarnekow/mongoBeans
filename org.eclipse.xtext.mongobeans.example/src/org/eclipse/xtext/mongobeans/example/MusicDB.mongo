@@ -8,7 +8,7 @@ package org.musicdb {
 		String name
 		Album* albums
 		
-		def Iterable<Track> getOevre() {
+		Iterable<Track> getOevre() {
 			albums.map[tracks].flatten
 		}
 	}  
@@ -21,7 +21,7 @@ package org.musicdb {
 		int year 
 		Track* tracks
 		
-		def Duration getDuration() {
+		Duration getDuration() {
 			tracks.map[duration].reduce[Duration a, Duration b| a + b]
 		}
 	}
@@ -34,16 +34,16 @@ package org.musicdb {
 	mongobean Duration {
 		int seconds
 	
-		def void fromString(String duration) {
+		void fromString(String duration) {
 			val split = duration.split(':')
 			seconds = Integer::parseInt(split.get(0)) * 60 + Integer::parseInt(split.get(1))
 		}		
 		
-		def String toString() {
+		String toString() {
 			Integer::toString(seconds / 60) + ':' + Integer::toString(seconds % 60)
 		}
 		
-		def Duration operator_plus(Duration other) {
+		Duration operator_plus(Duration other) {
 			new Duration() [
 				seconds = this.seconds + other.seconds
 			]

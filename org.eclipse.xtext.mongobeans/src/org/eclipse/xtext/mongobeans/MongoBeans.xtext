@@ -22,13 +22,13 @@ MongoBean:
 	'}';
 
 AbstractFeature:
-	MongoProperty | MongoOperation;
+	MongoOperation | MongoProperty;
 
 MongoProperty:
 	type=JvmTypeReference (many?='*')? name=ValidID;
 
 MongoOperation:
-	'def' returnType=JvmTypeReference name=ValidID '(' 
+	=>(returnType=JvmTypeReference name=ValidID '(') 
 		(parameters+=FullJvmFormalParameter (',' parameters+=FullJvmFormalParameter)*)? 
 	')' 
 	body=XBlockExpression;

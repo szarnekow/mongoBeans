@@ -347,23 +347,32 @@ ruleAbstractFeature returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
+(((((
 (
+ruleJvmTypeReference
+)
+)(
+(
+ruleValidID
+)
+)	'(' 
+))=>
     { 
-        newCompositeNode(grammarAccess.getAbstractFeatureAccess().getMongoPropertyParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getAbstractFeatureAccess().getMongoOperationParserRuleCall_0()); 
     }
-    this_MongoProperty_0=ruleMongoProperty
+    this_MongoOperation_0=ruleMongoOperation
     { 
-        $current = $this_MongoProperty_0.current; 
+        $current = $this_MongoOperation_0.current; 
         afterParserOrEnumRuleCall();
     }
-
+)
     |
     { 
-        newCompositeNode(grammarAccess.getAbstractFeatureAccess().getMongoOperationParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getAbstractFeatureAccess().getMongoPropertyParserRuleCall_1()); 
     }
-    this_MongoOperation_1=ruleMongoOperation
+    this_MongoProperty_1=ruleMongoProperty
     { 
-        $current = $this_MongoOperation_1.current; 
+        $current = $this_MongoProperty_1.current; 
         afterParserOrEnumRuleCall();
     }
 )
@@ -459,23 +468,28 @@ ruleMongoOperation returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='def' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getMongoOperationAccess().getDefKeyword_0());
-    }
+(((((
 (
+ruleJvmTypeReference
+)
+)(
+(
+ruleValidID
+)
+)	'(' 
+))=>((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMongoOperationAccess().getReturnTypeJvmTypeReferenceParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getMongoOperationAccess().getReturnTypeJvmTypeReferenceParserRuleCall_0_0_0_0()); 
 	    }
-		lv_returnType_1_0=ruleJvmTypeReference		{
+		lv_returnType_0_0=ruleJvmTypeReference		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMongoOperationRule());
 	        }
        		set(
        			$current, 
        			"returnType",
-        		lv_returnType_1_0, 
+        		lv_returnType_0_0, 
         		"JvmTypeReference");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -484,82 +498,82 @@ ruleMongoOperation returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMongoOperationAccess().getNameValidIDParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getMongoOperationAccess().getNameValidIDParserRuleCall_0_0_1_0()); 
 	    }
-		lv_name_2_0=ruleValidID		{
+		lv_name_1_0=ruleValidID		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMongoOperationRule());
 	        }
        		set(
        			$current, 
        			"name",
-        		lv_name_2_0, 
+        		lv_name_1_0, 
         		"ValidID");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_3='(' 
+)	otherlv_2='(' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getMongoOperationAccess().getLeftParenthesisKeyword_3());
+    	newLeafNode(otherlv_2, grammarAccess.getMongoOperationAccess().getLeftParenthesisKeyword_0_0_2());
     }
-((
+))((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMongoOperationAccess().getParametersFullJvmFormalParameterParserRuleCall_4_0_0()); 
+	        newCompositeNode(grammarAccess.getMongoOperationAccess().getParametersFullJvmFormalParameterParserRuleCall_1_0_0()); 
 	    }
-		lv_parameters_4_0=ruleFullJvmFormalParameter		{
+		lv_parameters_3_0=ruleFullJvmFormalParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMongoOperationRule());
 	        }
        		add(
        			$current, 
        			"parameters",
-        		lv_parameters_4_0, 
+        		lv_parameters_3_0, 
         		"FullJvmFormalParameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_5=',' 
+)(	otherlv_4=',' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getMongoOperationAccess().getCommaKeyword_4_1_0());
+    	newLeafNode(otherlv_4, grammarAccess.getMongoOperationAccess().getCommaKeyword_1_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMongoOperationAccess().getParametersFullJvmFormalParameterParserRuleCall_4_1_1_0()); 
+	        newCompositeNode(grammarAccess.getMongoOperationAccess().getParametersFullJvmFormalParameterParserRuleCall_1_1_1_0()); 
 	    }
-		lv_parameters_6_0=ruleFullJvmFormalParameter		{
+		lv_parameters_5_0=ruleFullJvmFormalParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMongoOperationRule());
 	        }
        		add(
        			$current, 
        			"parameters",
-        		lv_parameters_6_0, 
+        		lv_parameters_5_0, 
         		"FullJvmFormalParameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*)?	otherlv_7=')' 
+))*)?	otherlv_6=')' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getMongoOperationAccess().getRightParenthesisKeyword_5());
+    	newLeafNode(otherlv_6, grammarAccess.getMongoOperationAccess().getRightParenthesisKeyword_2());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMongoOperationAccess().getBodyXBlockExpressionParserRuleCall_6_0()); 
+	        newCompositeNode(grammarAccess.getMongoOperationAccess().getBodyXBlockExpressionParserRuleCall_3_0()); 
 	    }
-		lv_body_8_0=ruleXBlockExpression		{
+		lv_body_7_0=ruleXBlockExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMongoOperationRule());
 	        }
        		set(
        			$current, 
        			"body",
-        		lv_body_8_0, 
+        		lv_body_7_0, 
         		"XBlockExpression");
 	        afterParserOrEnumRuleCall();
 	    }
