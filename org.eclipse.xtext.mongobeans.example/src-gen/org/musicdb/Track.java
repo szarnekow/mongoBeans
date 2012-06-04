@@ -3,7 +3,9 @@ package org.musicdb;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.eclipse.xtext.mongobeans.IDBObjectWrapper;
+import org.eclipse.xtext.mongobeans.WrappingUtil;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.musicdb.Duration;
 
 public class Track implements IDBObjectWrapper {
   /**
@@ -16,9 +18,17 @@ public class Track implements IDBObjectWrapper {
   /**
    * Creates a new Track wrapping a new {@link BasicDBObject}.
    */
-  public Track(final Procedure1<Track> initializer) {
+  public Track() {
     _dbObject = new BasicDBObject();
     _dbObject.put(JAVA_CLASS_KEY, "org.musicdb.Track");
+    
+  }
+  
+  /**
+   * Creates a new Track wrapping a new {@link BasicDBObject} with an Xtend friendly constructor.
+   */
+  public Track(final Procedure1<Track> initializer) {
+    this();
     initializer.apply(this);
     
   }
@@ -37,17 +47,11 @@ public class Track implements IDBObjectWrapper {
      _dbObject.put("title", title);
   }
   
-  /**
-   * the duration in seconds
-   */
-  public int getDuration() {
-    return (Integer) _dbObject.get("duration");
+  public Duration getDuration() {
+    return WrappingUtil.wrapAndCast((DBObject) _dbObject.get("duration"));
   }
   
-  /**
-   * the duration in seconds
-   */
-  public void setDuration(final int duration) {
-     _dbObject.put("duration", duration);
+  public void setDuration(final Duration duration) {
+     _dbObject.put("duration", WrappingUtil.unwrap(duration));
   }
 }

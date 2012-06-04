@@ -26,9 +26,17 @@ public class Artist implements IDBObjectWrapper {
   /**
    * Creates a new Artist wrapping a new {@link BasicDBObject}.
    */
-  public Artist(final Procedure1<Artist> initializer) {
+  public Artist() {
     _dbObject = new BasicDBObject();
     _dbObject.put(JAVA_CLASS_KEY, "org.musicdb.Artist");
+    
+  }
+  
+  /**
+   * Creates a new Artist wrapping a new {@link BasicDBObject} with an Xtend friendly constructor.
+   */
+  public Artist(final Procedure1<Artist> initializer) {
+    this();
     initializer.apply(this);
     
   }
@@ -55,7 +63,7 @@ public class Artist implements IDBObjectWrapper {
     return _albums;
   }
   
-  public Iterable<Track> getAllTracks() {
+  public Iterable<Track> getOevre() {
     List<Album> _albums = this.getAlbums();
     final Function1<Album,List<Track>> _function = new Function1<Album,List<Track>>() {
         public List<Track> apply(final Album it) {

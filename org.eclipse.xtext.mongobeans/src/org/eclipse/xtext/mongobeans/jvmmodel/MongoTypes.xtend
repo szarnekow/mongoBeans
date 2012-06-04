@@ -8,7 +8,7 @@ class MongoTypes {
 
 	@Inject extension SuperTypeCollector
 	
-	val mongoPrimitiveTypes = newArrayList(
+	public val mongoPrimitiveTypes = newArrayList(
 		'double',
 		'java.lang.Double',
 		'java.lang.String',
@@ -23,14 +23,18 @@ class MongoTypes {
 		'java.lang.Integer',
 		'long',
 		'java.lang.Long'
-	)
+	).unmodifiableView
 	
 	def isMongoPrimitiveType(JvmTypeReference typeRef) {
 		mongoPrimitiveTypes.contains(typeRef.qualifiedName)
 	}
 	
 	def isMongoType(JvmTypeReference typeRef) {
-		isMongoPrimitiveType(typeRef) || typeRef.collectSuperTypeNames.contains('org.eclipse.xtext.mongobeans.IDBObjectWrapper')
+		isMongoPrimitiveType(typeRef) || isMongoBean(typeRef)
+	}
+	
+	def isMongoBean(JvmTypeReference typeRef) {
+		typeRef.collectSuperTypeNames.contains('org.eclipse.xtext.mongobeans.IDBObjectWrapper')
 	}
 	
 }

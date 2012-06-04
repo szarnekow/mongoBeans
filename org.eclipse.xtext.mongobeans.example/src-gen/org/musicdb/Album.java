@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.musicdb.Duration;
 import org.musicdb.Track;
 
 /**
@@ -26,9 +27,17 @@ public class Album implements IDBObjectWrapper {
   /**
    * Creates a new Album wrapping a new {@link BasicDBObject}.
    */
-  public Album(final Procedure1<Album> initializer) {
+  public Album() {
     _dbObject = new BasicDBObject();
     _dbObject.put(JAVA_CLASS_KEY, "org.musicdb.Album");
+    
+  }
+  
+  /**
+   * Creates a new Album wrapping a new {@link BasicDBObject} with an Xtend friendly constructor.
+   */
+  public Album(final Procedure1<Album> initializer) {
+    this();
     initializer.apply(this);
     
   }
@@ -63,22 +72,22 @@ public class Album implements IDBObjectWrapper {
     return _tracks;
   }
   
-  public int getDuration() {
+  public Duration getDuration() {
     List<Track> _tracks = this.getTracks();
-    final Function1<Track,Integer> _function = new Function1<Track,Integer>() {
-        public Integer apply(final Track it) {
-          int _duration = it.getDuration();
-          return Integer.valueOf(_duration);
+    final Function1<Track,Duration> _function = new Function1<Track,Duration>() {
+        public Duration apply(final Track it) {
+          Duration _duration = it.getDuration();
+          return _duration;
         }
       };
-    List<Integer> _map = ListExtensions.<Track, Integer>map(_tracks, _function);
-    final Function2<Integer,Integer,Integer> _function_1 = new Function2<Integer,Integer,Integer>() {
-        public Integer apply(final Integer a, final Integer b) {
-          int _plus = (a + b);
-          return Integer.valueOf(_plus);
+    List<Duration> _map = ListExtensions.<Track, Duration>map(_tracks, _function);
+    final Function2<Duration,Duration,Duration> _function_1 = new Function2<Duration,Duration,Duration>() {
+        public Duration apply(final Duration a, final Duration b) {
+          Duration _plus = a.operator_plus(b);
+          return _plus;
         }
       };
-    Integer _reduce = IterableExtensions.<Integer>reduce(_map, _function_1);
-    return (_reduce).intValue();
+    Duration _reduce = IterableExtensions.<Duration>reduce(_map, _function_1);
+    return _reduce;
   }
 }

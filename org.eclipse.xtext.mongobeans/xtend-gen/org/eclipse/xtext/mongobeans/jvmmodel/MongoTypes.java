@@ -2,6 +2,8 @@ package org.eclipse.xtext.mongobeans.jvmmodel;
 
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
@@ -13,8 +15,8 @@ public class MongoTypes {
   @Inject
   private SuperTypeCollector _superTypeCollector;
   
-  private final ArrayList<String> mongoPrimitiveTypes = new Function0<ArrayList<String>>() {
-    public ArrayList<String> apply() {
+  public final List<String> mongoPrimitiveTypes = new Function0<List<String>>() {
+    public List<String> apply() {
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(
         "double", 
         "java.lang.Double", 
@@ -30,7 +32,8 @@ public class MongoTypes {
         "java.lang.Integer", 
         "long", 
         "java.lang.Long");
-      return _newArrayList;
+      List<String> _unmodifiableView = Collections.<String>unmodifiableList(_newArrayList);
+      return _unmodifiableView;
     }
   }.apply();
   
@@ -46,10 +49,15 @@ public class MongoTypes {
     if (_isMongoPrimitiveType) {
       _or = true;
     } else {
-      Set<String> _collectSuperTypeNames = this._superTypeCollector.collectSuperTypeNames(typeRef);
-      boolean _contains = _collectSuperTypeNames.contains("org.eclipse.xtext.mongobeans.IDBObjectWrapper");
-      _or = (_isMongoPrimitiveType || _contains);
+      boolean _isMongoBean = this.isMongoBean(typeRef);
+      _or = (_isMongoPrimitiveType || _isMongoBean);
     }
     return _or;
+  }
+  
+  public boolean isMongoBean(final JvmTypeReference typeRef) {
+    Set<String> _collectSuperTypeNames = this._superTypeCollector.collectSuperTypeNames(typeRef);
+    boolean _contains = _collectSuperTypeNames.contains("org.eclipse.xtext.mongobeans.IDBObjectWrapper");
+    return _contains;
   }
 }

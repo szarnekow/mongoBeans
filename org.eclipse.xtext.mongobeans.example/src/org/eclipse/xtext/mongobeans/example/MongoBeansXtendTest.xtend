@@ -11,20 +11,21 @@ import static org.junit.Assert.*
 import static extension java.lang.Integer.*
 import org.junit.BeforeClass
 import org.junit.AfterClass
+import org.musicdb.Duration
 
-class MongoFacadeTest {
+class MongoBeansXtendTest {
 
 	extension MongoExtensions = new MongoExtensions
 	
 	static Mongo mongo
 	
 	@BeforeClass
-	def static startMongoDB() {
+	def static void startMongoDB() {
 		mongo = new Mongo()
 	}
 
 	@AfterClass
-	def static stopMongoDB() {
+	def static void stopMongoDB() {
 		mongo.close
 	}
 	
@@ -37,10 +38,10 @@ class MongoFacadeTest {
 			name = 'John Coltrane'
 			albums += new Album [
 				title = 'A Love Supreme'
-				tracks += new Track [ title = 'Part 1: Acknowledgement' ]
-				tracks += new Track [ title = 'Part 2: Resolution' ]
-				tracks += new Track [ title = 'Part 3: Pursuance' ]
-				tracks += new Track [ title = 'Part 4: Psalm' ]
+				track('Part 1: Acknowledgement', '7:43')
+				track('Part 2: Resolution', '7:20')
+				track('Part 3: Pursuance', '10:42')
+				track('Part 4: Psalm', '7:05')
 			]
 			albums += new Album [
 				title = 'Impressions'
@@ -50,23 +51,24 @@ class MongoFacadeTest {
 				track('After the Rain', '4:07') 
 			]
 		]
-		assertEquals(8, john.allTracks.size)
+		assertEquals(8, john.oevre.size)
 		dbCollection.save(john)
 
-		val johnFromDb = dbCollection.findOne(new Artist() [
+		val johnFromDb = dbCollection.findOne(new Artist [
 			name = 'John Coltrane'
 		])
 		assertNotNull(johnFromDb)
 		assertEquals(2, johnFromDb.albums.size)
 		val albumFromDb = johnFromDb.albums.get(1)
-		assertEquals(2151, albumFromDb.duration)
+		assertEquals("35:51", albumFromDb.duration.toString)
 	}
 	
 	def protected track(Album it, String trackTitle, String trackDuration) {
 		tracks += new Track [
 			title = trackTitle
-			val time = trackDuration.split(':')
-			duration = time.get(0).parseInt * 60 + time.get(1).parseInt 
+			duration = new Duration() [
+				fromString(trackDuration)
+			]
 		]
 	}
 }

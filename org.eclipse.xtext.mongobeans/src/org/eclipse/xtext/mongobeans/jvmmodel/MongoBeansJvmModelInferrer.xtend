@@ -62,15 +62,23 @@ class MongoBeansJvmModelInferrer extends AbstractModelInferrer {
 		]
 		inferredType.members += bean.toConstructor [
 			documentation = '''Creates a new «bean.name» wrapping a new {@link BasicDBObject}.'''
-			parameters += bean.toParameter('initializer', newTypeRef(bean, 'org.eclipse.xtext.xbase.lib.Procedures$Procedure1', 
-				newTypeRef(inferredType)
-			)) 
 			body = [
 				append('_dbObject = new ')
 				serialize(newTypeRef(bean, 'com.mongodb.BasicDBObject'), bean, it)
 				append('();\n')
 				append('''
 					_dbObject.put(JAVA_CLASS_KEY, "«inferredType.identifier»");
+				''')
+			]					
+		]   	
+		inferredType.members += bean.toConstructor [
+			documentation = '''Creates a new «bean.name» wrapping a new {@link BasicDBObject} with an Xtend friendly constructor.'''
+			parameters += bean.toParameter('initializer', newTypeRef(bean, 'org.eclipse.xtext.xbase.lib.Procedures$Procedure1', 
+				newTypeRef(inferredType)
+			)) 
+			body = [
+				append('''
+					this();
 					initializer.apply(this);
 				''')
 			]					
@@ -79,7 +87,7 @@ class MongoBeansJvmModelInferrer extends AbstractModelInferrer {
 	
 	def protected addDbObjectProperty(JvmDeclaredType inferredType, MongoBean bean) {
 		inferredType.members += bean.toField('_dbObject', newTypeRef(bean, 'com.mongodb.DBObject'))
-		inferredType.members += bean.toGetter('dBObject', '_dbObject', newTypeRef(bean, 'com.mongodb.DBObject'))
+		inferredType.members += bean.toGetter('dbObject', '_dbObject', newTypeRef(bean, 'com.mongodb.DBObject'))
 	}
 
 	def protected addListAccessor(JvmDeclaredType inferredType, MongoProperty property) {
@@ -120,16 +128,32 @@ class MongoBeansJvmModelInferrer extends AbstractModelInferrer {
 		inferredType.members += property.toMethod('get' + property.name.toFirstUpper, property.type) [
 			documentation = property.documentation
 			body = [
-				append('return (')
-				serialize(property.type.asWrapperTypeIfPrimitive, property, it)
-				append(''') _dbObject.get("«property.name»");''')
+				append('return ')
+				if(property.type.mongoBean) {
+					serialize(newTypeRef(property, 'org.eclipse.xtext.mongobeans.WrappingUtil'), property, it)
+					append('.wrapAndCast((')
+					serialize(newTypeRef(property, 'com.mongodb.DBObject'), property, it)
+					append(''') _dbObject.get("«property.name»"));''')
+				} else {
+					append('(')
+					serialize(property.type.asWrapperTypeIfPrimitive, property, it)
+					append(''') _dbObject.get("«property.name»");''')
+				} 
 			]
 		]
 		inferredType.members += property.toMethod('set' + property.name.toFirstUpper, null) [
 			documentation = property.documentation
 			parameters += toParameter(property.name, property.type)
 			body = [
-				append(''' _dbObject.put("«property.name»", «property.name»);''')
+				append(''' _dbObject.put("«property.name»", ''')
+				if(property.type.mongoBean) {
+					serialize(newTypeRef(property, 'org.eclipse.xtext.mongobeans.WrappingUtil'), property, it)
+					append(".unwrap(")
+				} 
+				append(property.name)
+				if(property.type.mongoBean)
+					append(')')
+				append(');')
 			]
 		]
 	}

@@ -18,7 +18,7 @@ class WrappingUtil {
 	def static <T> T wrapAndCast(DBObject dbObject) {
 		wrap(dbObject) as T
 	} 
-
+	
 	def static DBObject unwrap(Object wrapper) {
 		if(!(wrapper instanceof IDBObjectWrapper))
 			throw new IllegalArgumentException("Invalid type")

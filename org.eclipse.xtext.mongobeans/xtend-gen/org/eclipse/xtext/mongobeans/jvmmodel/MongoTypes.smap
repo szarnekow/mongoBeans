@@ -1,0 +1,31 @@
+SMAP
+MongoTypes.java
+Xtend
+*S Xtend
+*F
++ 0 MongoTypes.xtend
+src/org/eclipse/xtext/mongobeans/jvmmodel/MongoTypes.xtend
+*L
+11:18,3
+12:21
+13:22
+14:23
+15:24
+16:25
+17:26
+18:27
+19:28
+20:29
+21:30
+22:31
+23:32
+24:33
+25:34
+11:35,4
+29:41,2
+28:43
+33:47,8
+32:55
+37:59,2
+36:61
+*E
