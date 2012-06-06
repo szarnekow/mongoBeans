@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
+import org.eclipse.xtext.mongobeans.mongoBeans.MongoBean;
 import org.eclipse.xtext.mongobeans.mongoBeans.MongoBeansPackage;
 import org.eclipse.xtext.mongobeans.mongoBeans.MongoProperty;
 
@@ -23,6 +24,7 @@ import org.eclipse.xtext.mongobeans.mongoBeans.MongoProperty;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.mongobeans.mongoBeans.impl.MongoPropertyImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.mongobeans.mongoBeans.impl.MongoPropertyImpl#getInlineType <em>Inline Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.mongobeans.mongoBeans.impl.MongoPropertyImpl#isMany <em>Many</em>}</li>
  * </ul>
  * </p>
@@ -40,6 +42,16 @@ public class MongoPropertyImpl extends AbstractFeatureImpl implements MongoPrope
    * @ordered
    */
   protected JvmTypeReference type;
+
+  /**
+   * The cached value of the '{@link #getInlineType() <em>Inline Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getInlineType()
+   * @generated
+   * @ordered
+   */
+  protected MongoBean inlineType;
 
   /**
    * The default value of the '{@link #isMany() <em>Many</em>}' attribute.
@@ -135,6 +147,54 @@ public class MongoPropertyImpl extends AbstractFeatureImpl implements MongoPrope
    * <!-- end-user-doc -->
    * @generated
    */
+  public MongoBean getInlineType()
+  {
+    return inlineType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetInlineType(MongoBean newInlineType, NotificationChain msgs)
+  {
+    MongoBean oldInlineType = inlineType;
+    inlineType = newInlineType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MongoBeansPackage.MONGO_PROPERTY__INLINE_TYPE, oldInlineType, newInlineType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setInlineType(MongoBean newInlineType)
+  {
+    if (newInlineType != inlineType)
+    {
+      NotificationChain msgs = null;
+      if (inlineType != null)
+        msgs = ((InternalEObject)inlineType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MongoBeansPackage.MONGO_PROPERTY__INLINE_TYPE, null, msgs);
+      if (newInlineType != null)
+        msgs = ((InternalEObject)newInlineType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MongoBeansPackage.MONGO_PROPERTY__INLINE_TYPE, null, msgs);
+      msgs = basicSetInlineType(newInlineType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MongoBeansPackage.MONGO_PROPERTY__INLINE_TYPE, newInlineType, newInlineType));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public boolean isMany()
   {
     return many;
@@ -165,6 +225,8 @@ public class MongoPropertyImpl extends AbstractFeatureImpl implements MongoPrope
     {
       case MongoBeansPackage.MONGO_PROPERTY__TYPE:
         return basicSetType(null, msgs);
+      case MongoBeansPackage.MONGO_PROPERTY__INLINE_TYPE:
+        return basicSetInlineType(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -181,6 +243,8 @@ public class MongoPropertyImpl extends AbstractFeatureImpl implements MongoPrope
     {
       case MongoBeansPackage.MONGO_PROPERTY__TYPE:
         return getType();
+      case MongoBeansPackage.MONGO_PROPERTY__INLINE_TYPE:
+        return getInlineType();
       case MongoBeansPackage.MONGO_PROPERTY__MANY:
         return isMany();
     }
@@ -199,6 +263,9 @@ public class MongoPropertyImpl extends AbstractFeatureImpl implements MongoPrope
     {
       case MongoBeansPackage.MONGO_PROPERTY__TYPE:
         setType((JvmTypeReference)newValue);
+        return;
+      case MongoBeansPackage.MONGO_PROPERTY__INLINE_TYPE:
+        setInlineType((MongoBean)newValue);
         return;
       case MongoBeansPackage.MONGO_PROPERTY__MANY:
         setMany((Boolean)newValue);
@@ -220,6 +287,9 @@ public class MongoPropertyImpl extends AbstractFeatureImpl implements MongoPrope
       case MongoBeansPackage.MONGO_PROPERTY__TYPE:
         setType((JvmTypeReference)null);
         return;
+      case MongoBeansPackage.MONGO_PROPERTY__INLINE_TYPE:
+        setInlineType((MongoBean)null);
+        return;
       case MongoBeansPackage.MONGO_PROPERTY__MANY:
         setMany(MANY_EDEFAULT);
         return;
@@ -239,6 +309,8 @@ public class MongoPropertyImpl extends AbstractFeatureImpl implements MongoPrope
     {
       case MongoBeansPackage.MONGO_PROPERTY__TYPE:
         return type != null;
+      case MongoBeansPackage.MONGO_PROPERTY__INLINE_TYPE:
+        return inlineType != null;
       case MongoBeansPackage.MONGO_PROPERTY__MANY:
         return many != MANY_EDEFAULT;
     }

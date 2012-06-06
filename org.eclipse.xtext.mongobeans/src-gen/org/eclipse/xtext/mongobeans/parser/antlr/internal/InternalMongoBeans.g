@@ -278,53 +278,49 @@ ruleMongoBean returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='mongobean' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getMongoBeanAccess().getMongobeanKeyword_0());
-    }
-(
+((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMongoBeanAccess().getNameValidIDParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getMongoBeanAccess().getNameValidIDParserRuleCall_0_0()); 
 	    }
-		lv_name_1_0=ruleValidID		{
+		lv_name_0_0=ruleValidID		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMongoBeanRule());
 	        }
        		set(
        			$current, 
        			"name",
-        		lv_name_1_0, 
+        		lv_name_0_0, 
         		"ValidID");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_2='{' 
+)	otherlv_1='{' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getMongoBeanAccess().getLeftCurlyBracketKeyword_2());
+    	newLeafNode(otherlv_1, grammarAccess.getMongoBeanAccess().getLeftCurlyBracketKeyword_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMongoBeanAccess().getFeaturesAbstractFeatureParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getMongoBeanAccess().getFeaturesAbstractFeatureParserRuleCall_2_0()); 
 	    }
-		lv_features_3_0=ruleAbstractFeature		{
+		lv_features_2_0=ruleAbstractFeature		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMongoBeanRule());
 	        }
        		add(
        			$current, 
        			"features",
-        		lv_features_3_0, 
+        		lv_features_2_0, 
         		"AbstractFeature");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)*	otherlv_4='}' 
+)*	otherlv_3='}' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getMongoBeanAccess().getRightCurlyBracketKeyword_4());
+    	newLeafNode(otherlv_3, grammarAccess.getMongoBeanAccess().getRightCurlyBracketKeyword_3());
     }
 )
 ;
@@ -396,10 +392,10 @@ ruleMongoProperty returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
+(((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMongoPropertyAccess().getTypeJvmTypeReferenceParserRuleCall_0_0()); 
+	        newCompositeNode(grammarAccess.getMongoPropertyAccess().getTypeJvmTypeReferenceParserRuleCall_0_0_0()); 
 	    }
 		lv_type_0_0=ruleJvmTypeReference		{
 	        if ($current==null) {
@@ -414,11 +410,30 @@ ruleMongoProperty returns [EObject current=null]
 	    }
 
 )
-)(
+)
+    |(
 (
-		lv_many_1_0=	'*' 
+		{ 
+	        newCompositeNode(grammarAccess.getMongoPropertyAccess().getInlineTypeMongoBeanParserRuleCall_0_1_0()); 
+	    }
+		lv_inlineType_1_0=ruleMongoBean		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMongoPropertyRule());
+	        }
+       		set(
+       			$current, 
+       			"inlineType",
+        		lv_inlineType_1_0, 
+        		"MongoBean");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))(
+(
+		lv_many_2_0=	'*' 
     {
-        newLeafNode(lv_many_1_0, grammarAccess.getMongoPropertyAccess().getManyAsteriskKeyword_1_0());
+        newLeafNode(lv_many_2_0, grammarAccess.getMongoPropertyAccess().getManyAsteriskKeyword_1_0());
     }
  
 	    {
@@ -434,14 +449,14 @@ ruleMongoProperty returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getMongoPropertyAccess().getNameValidIDParserRuleCall_2_0()); 
 	    }
-		lv_name_2_0=ruleValidID		{
+		lv_name_3_0=ruleValidID		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMongoPropertyRule());
 	        }
        		set(
        			$current, 
        			"name",
-        		lv_name_2_0, 
+        		lv_name_3_0, 
         		"ValidID");
 	        afterParserOrEnumRuleCall();
 	    }

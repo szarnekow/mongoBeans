@@ -127,41 +127,37 @@ public class MongoBeansGrammarAccess extends AbstractGrammarElementFinder {
 	public class MongoBeanElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MongoBean");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cMongobeanKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cFeaturesAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cFeaturesAbstractFeatureParserRuleCall_3_0 = (RuleCall)cFeaturesAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameValidIDParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cFeaturesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cFeaturesAbstractFeatureParserRuleCall_2_0 = (RuleCall)cFeaturesAssignment_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//MongoBean:
-		//	"mongobean" name=ValidID "{" features+=AbstractFeature* "}";
+		//	name=ValidID "{" features+=AbstractFeature* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"mongobean" name=ValidID "{" features+=AbstractFeature* "}"
+		//name=ValidID "{" features+=AbstractFeature* "}"
 		public Group getGroup() { return cGroup; }
 
-		//"mongobean"
-		public Keyword getMongobeanKeyword_0() { return cMongobeanKeyword_0; }
-
 		//name=ValidID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
 		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
+		public RuleCall getNameValidIDParserRuleCall_0_0() { return cNameValidIDParserRuleCall_0_0; }
 
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
 		//features+=AbstractFeature*
-		public Assignment getFeaturesAssignment_3() { return cFeaturesAssignment_3; }
+		public Assignment getFeaturesAssignment_2() { return cFeaturesAssignment_2; }
 
 		//AbstractFeature
-		public RuleCall getFeaturesAbstractFeatureParserRuleCall_3_0() { return cFeaturesAbstractFeatureParserRuleCall_3_0; }
+		public RuleCall getFeaturesAbstractFeatureParserRuleCall_2_0() { return cFeaturesAbstractFeatureParserRuleCall_2_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
 	public class AbstractFeatureElements extends AbstractParserRuleElementFinder {
@@ -187,25 +183,37 @@ public class MongoBeansGrammarAccess extends AbstractGrammarElementFinder {
 	public class MongoPropertyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MongoProperty");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_0_0_0 = (RuleCall)cTypeAssignment_0_0.eContents().get(0);
+		private final Assignment cInlineTypeAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
+		private final RuleCall cInlineTypeMongoBeanParserRuleCall_0_1_0 = (RuleCall)cInlineTypeAssignment_0_1.eContents().get(0);
 		private final Assignment cManyAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final Keyword cManyAsteriskKeyword_1_0 = (Keyword)cManyAssignment_1.eContents().get(0);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameValidIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//MongoProperty:
-		//	type=JvmTypeReference many?="*"? name=ValidID;
+		//	(type=JvmTypeReference | inlineType=MongoBean) many?="*"? name=ValidID;
 		public ParserRule getRule() { return rule; }
 
-		//type=JvmTypeReference many?="*"? name=ValidID
+		//(type=JvmTypeReference | inlineType=MongoBean) many?="*"? name=ValidID
 		public Group getGroup() { return cGroup; }
 
+		//type=JvmTypeReference | inlineType=MongoBean
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
 		//type=JvmTypeReference
-		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
+		public Assignment getTypeAssignment_0_0() { return cTypeAssignment_0_0; }
 
 		//JvmTypeReference
-		public RuleCall getTypeJvmTypeReferenceParserRuleCall_0_0() { return cTypeJvmTypeReferenceParserRuleCall_0_0; }
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_0_0_0() { return cTypeJvmTypeReferenceParserRuleCall_0_0_0; }
+
+		//inlineType=MongoBean
+		public Assignment getInlineTypeAssignment_0_1() { return cInlineTypeAssignment_0_1; }
+
+		//MongoBean
+		public RuleCall getInlineTypeMongoBeanParserRuleCall_0_1_0() { return cInlineTypeMongoBeanParserRuleCall_0_1_0; }
 
 		//many?="*"?
 		public Assignment getManyAssignment_1() { return cManyAssignment_1; }
@@ -412,7 +420,7 @@ public class MongoBeansGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MongoBean:
-	//	"mongobean" name=ValidID "{" features+=AbstractFeature* "}";
+	//	name=ValidID "{" features+=AbstractFeature* "}";
 	public MongoBeanElements getMongoBeanAccess() {
 		return (pMongoBean != null) ? pMongoBean : (pMongoBean = new MongoBeanElements());
 	}
@@ -432,7 +440,7 @@ public class MongoBeansGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MongoProperty:
-	//	type=JvmTypeReference many?="*"? name=ValidID;
+	//	(type=JvmTypeReference | inlineType=MongoBean) many?="*"? name=ValidID;
 	public MongoPropertyElements getMongoPropertyAccess() {
 		return (pMongoProperty != null) ? pMongoProperty : (pMongoProperty = new MongoPropertyElements());
 	}

@@ -27,6 +27,7 @@
     </genClasses>
     <genClasses ecoreClass="MongoBeans.ecore#//MongoProperty">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MongoBeans.ecore#//MongoProperty/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MongoBeans.ecore#//MongoProperty/inlineType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MongoBeans.ecore#//MongoProperty/many"/>
     </genClasses>
     <genClasses ecoreClass="MongoBeans.ecore#//MongoOperation">

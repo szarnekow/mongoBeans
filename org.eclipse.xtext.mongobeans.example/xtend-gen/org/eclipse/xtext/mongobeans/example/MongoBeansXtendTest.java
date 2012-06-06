@@ -4,18 +4,17 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
 import java.util.List;
-import org.eclipse.xtext.mongobeans.example.MongoExtensions;
+import org.eclipse.xtext.mongobeans.MongoExtensions;
+import org.eclipse.xtext.mongobeans.example.Duration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.musicdb.Album;
 import org.musicdb.Artist;
-import org.musicdb.Duration;
 import org.musicdb.Track;
 
 @SuppressWarnings("all")
@@ -27,96 +26,93 @@ public class MongoBeansXtendTest {
     }
   }.apply();
   
-  private static Mongo mongo;
-  
-  @BeforeClass
-  public static void startMongoDB() {
+  @Test
+  public void testMongoFacade() {
     try {
       Mongo _mongo = new Mongo();
-      MongoBeansXtendTest.mongo = _mongo;
+      final Mongo mongo = _mongo;
+      try {
+        final DB db = mongo.getDB("testdb");
+        final DBCollection dbCollection = db.getCollection("testCollection");
+        Artist _artist = new Artist();
+        final Procedure1<Artist> _function = new Procedure1<Artist>() {
+            public void apply(final Artist it) {
+              it.setName("John Coltrane");
+              final Procedure1<Album> _function = new Procedure1<Album>() {
+                  public void apply(final Album it) {
+                    it.setTitle("A Love Supreme");
+                    it.setYear(1965);
+                    MongoBeansXtendTest.this.addTrack(it, "Part 1: Acknowledgement", "7:43");
+                    MongoBeansXtendTest.this.addTrack(it, "Part 2: Resolution", "7:20");
+                    MongoBeansXtendTest.this.addTrack(it, "Part 3: Pursuance", "10:42");
+                    MongoBeansXtendTest.this.addTrack(it, "Part 4: Psalm", "7:05");
+                  }
+                };
+              MongoBeansXtendTest.this.addAlbum(it, _function);
+              final Procedure1<Album> _function_1 = new Procedure1<Album>() {
+                  public void apply(final Album it) {
+                    it.setTitle("Impressions");
+                    it.setYear(1961);
+                    MongoBeansXtendTest.this.addTrack(it, "India", "13:52");
+                    MongoBeansXtendTest.this.addTrack(it, "Up \'gainst the Wall", "3:12");
+                    MongoBeansXtendTest.this.addTrack(it, "Impressions", "14:40");
+                    MongoBeansXtendTest.this.addTrack(it, "After the Rain", "4:07");
+                  }
+                };
+              MongoBeansXtendTest.this.addAlbum(it, _function_1);
+            }
+          };
+        final Artist john = ObjectExtensions.<Artist>operator_doubleArrow(_artist, _function);
+        Iterable<Track> _oevre = john.getOevre();
+        int _size = IterableExtensions.size(_oevre);
+        Assert.assertEquals(8, _size);
+        this._mongoExtensions.save(dbCollection, john);
+        Artist _artist_1 = new Artist();
+        final Procedure1<Artist> _function_1 = new Procedure1<Artist>() {
+            public void apply(final Artist it) {
+              it.setName("John Coltrane");
+            }
+          };
+        Artist _doubleArrow = ObjectExtensions.<Artist>operator_doubleArrow(_artist_1, _function_1);
+        final Artist johnFromDb = this._mongoExtensions.<Artist>findOne(dbCollection, _doubleArrow);
+        Assert.assertNotNull(johnFromDb);
+        List<Album> _albums = johnFromDb.getAlbums();
+        int _size_1 = _albums.size();
+        Assert.assertEquals(2, _size_1);
+        List<Album> _albums_1 = johnFromDb.getAlbums();
+        final Album albumFromDb = _albums_1.get(1);
+        Duration _duration = albumFromDb.getDuration();
+        String _string = _duration.toString();
+        Assert.assertEquals("35:51", _string);
+      } finally {
+        mongo.close();
+      }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @AfterClass
-  public static void stopMongoDB() {
-    MongoBeansXtendTest.mongo.close();
+  protected boolean addAlbum(final Artist it, final Procedure1<? super Album> initializer) {
+    List<Album> _albums = it.getAlbums();
+    Album _album = new Album();
+    Album _doubleArrow = ObjectExtensions.<Album>operator_doubleArrow(_album, initializer);
+    boolean _add = _albums.add(_doubleArrow);
+    return _add;
   }
   
-  @Test
-  public void testMongoFacade() {
-    final DB db = MongoBeansXtendTest.mongo.getDB("testdb");
-    final DBCollection dbCollection = db.getCollection("testCollection");
-    final Procedure1<Artist> _function = new Procedure1<Artist>() {
-        public void apply(final Artist it) {
-          it.setName("John Coltrane");
-          List<Album> _albums = it.getAlbums();
-          final Procedure1<Album> _function = new Procedure1<Album>() {
-              public void apply(final Album it) {
-                it.setTitle("A Love Supreme");
-                MongoBeansXtendTest.this.track(it, "Part 1: Acknowledgement", "7:43");
-                MongoBeansXtendTest.this.track(it, "Part 2: Resolution", "7:20");
-                MongoBeansXtendTest.this.track(it, "Part 3: Pursuance", "10:42");
-                MongoBeansXtendTest.this.track(it, "Part 4: Psalm", "7:05");
-              }
-            };
-          Album _album = new Album(_function);
-          _albums.add(_album);
-          List<Album> _albums_1 = it.getAlbums();
-          final Procedure1<Album> _function_1 = new Procedure1<Album>() {
-              public void apply(final Album it) {
-                it.setTitle("Impressions");
-                MongoBeansXtendTest.this.track(it, "India", "13:52");
-                MongoBeansXtendTest.this.track(it, "Up \'gainst the Wall", "3:12");
-                MongoBeansXtendTest.this.track(it, "Impressions", "14:40");
-                MongoBeansXtendTest.this.track(it, "After the Rain", "4:07");
-              }
-            };
-          Album _album_1 = new Album(_function_1);
-          _albums_1.add(_album_1);
-        }
-      };
-    Artist _artist = new Artist(_function);
-    final Artist john = _artist;
-    Iterable<Track> _oevre = john.getOevre();
-    int _size = IterableExtensions.size(_oevre);
-    Assert.assertEquals(8, _size);
-    this._mongoExtensions.save(dbCollection, john);
-    final Procedure1<Artist> _function_1 = new Procedure1<Artist>() {
-        public void apply(final Artist it) {
-          it.setName("John Coltrane");
-        }
-      };
-    Artist _artist_1 = new Artist(_function_1);
-    final Artist johnFromDb = this._mongoExtensions.<Artist>findOne(dbCollection, _artist_1);
-    Assert.assertNotNull(johnFromDb);
-    List<Album> _albums = johnFromDb.getAlbums();
-    int _size_1 = _albums.size();
-    Assert.assertEquals(2, _size_1);
-    List<Album> _albums_1 = johnFromDb.getAlbums();
-    final Album albumFromDb = _albums_1.get(1);
-    Duration _duration = albumFromDb.getDuration();
-    String _string = _duration.toString();
-    Assert.assertEquals("35:51", _string);
-  }
-  
-  protected boolean track(final Album it, final String trackTitle, final String trackDuration) {
+  protected boolean addTrack(final Album it, final String trackTitle, final String trackDuration) {
     List<Track> _tracks = it.getTracks();
+    Track _track = new Track();
     final Procedure1<Track> _function = new Procedure1<Track>() {
         public void apply(final Track it) {
           it.setTitle(trackTitle);
-          final Procedure1<Duration> _function = new Procedure1<Duration>() {
-              public void apply(final Duration it) {
-                it.fromString(trackDuration);
-              }
-            };
-          Duration _duration = new Duration(_function);
-          it.setDuration(_duration);
+          Duration _fromString = Duration.fromString(trackDuration);
+          int _seconds = _fromString.getSeconds();
+          it.setSeconds(_seconds);
         }
       };
-    Track _track = new Track(_function);
-    boolean _add = _tracks.add(_track);
+    Track _doubleArrow = ObjectExtensions.<Track>operator_doubleArrow(_track, _function);
+    boolean _add = _tracks.add(_doubleArrow);
     return _add;
   }
 }

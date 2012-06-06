@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.mongobeans.mongoBeans.MongoProperty#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.mongobeans.mongoBeans.MongoProperty#getInlineType <em>Inline Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.mongobeans.mongoBeans.MongoProperty#isMany <em>Many</em>}</li>
  * </ul>
  * </p>
@@ -48,6 +49,32 @@ public interface MongoProperty extends AbstractFeature
    * @generated
    */
   void setType(JvmTypeReference value);
+
+  /**
+   * Returns the value of the '<em><b>Inline Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Inline Type</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Inline Type</em>' containment reference.
+   * @see #setInlineType(MongoBean)
+   * @see org.eclipse.xtext.mongobeans.mongoBeans.MongoBeansPackage#getMongoProperty_InlineType()
+   * @model containment="true"
+   * @generated
+   */
+  MongoBean getInlineType();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.mongobeans.mongoBeans.MongoProperty#getInlineType <em>Inline Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Inline Type</em>' containment reference.
+   * @see #getInlineType()
+   * @generated
+   */
+  void setInlineType(MongoBean value);
 
   /**
    * Returns the value of the '<em><b>Many</b></em>' attribute.

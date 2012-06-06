@@ -1,17 +1,18 @@
 package org.eclipse.xtext.mongobeans
 
 import com.mongodb.DBObject
+import org.eclipse.xtext.mongobeans.IMongoBean
 
 class WrappingUtil {
 	
-	def static IDBObjectWrapper wrap(DBObject dbObject) {
-		val javaClassName = dbObject.get(IDBObjectWrapper::JAVA_CLASS_KEY)?.toString
+	def static IMongoBean wrap(DBObject dbObject) {
+		val javaClassName = dbObject.get(org::eclipse::xtext::mongobeans::IMongoBean::JAVA_CLASS_KEY)?.toString
 		val javaClass = typeof(WrappingUtil).classLoader.loadClass(javaClassName)
-		if(typeof(IDBObjectWrapper).isAssignableFrom(javaClass)) {
+		if(typeof(IMongoBean).isAssignableFrom(javaClass)) {
 			val constructor = javaClass.getConstructor(typeof(DBObject))
-			constructor.newInstance(dbObject) as IDBObjectWrapper
+			constructor.newInstance(dbObject) as IMongoBean
 		} else {
-			throw new IllegalStateException('''Stored javaClass '«javaClassName»' does not extend '«typeof(IDBObjectWrapper).simpleName»'«»''')
+			throw new IllegalStateException('''Stored javaClass '«javaClassName»' does not extend '«typeof(IMongoBean).simpleName»'«»''')
 		}
 	}
 	
@@ -20,10 +21,10 @@ class WrappingUtil {
 	} 
 	
 	def static DBObject unwrap(Object wrapper) {
-		if(!(wrapper instanceof IDBObjectWrapper))
+		if(!(wrapper instanceof IMongoBean))
 			throw new IllegalArgumentException("Invalid type")
 		else 
-			(wrapper as IDBObjectWrapper).getDbObject
+			(wrapper as IMongoBean).getDbObject
 	}
 
 }

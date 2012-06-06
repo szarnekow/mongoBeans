@@ -3,20 +3,16 @@ package org.musicdb;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import java.util.List;
-import org.eclipse.xtext.mongobeans.DBObjectListWrapper;
-import org.eclipse.xtext.mongobeans.IDBObjectWrapper;
+import org.eclipse.xtext.mongobeans.IMongoBean;
+import org.eclipse.xtext.mongobeans.MongoBeanList;
+import org.eclipse.xtext.mongobeans.example.Duration;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.musicdb.Duration;
 import org.musicdb.Track;
 
-/**
- * A record, CD, DVD or another collection of tracks
- */
-public class Album implements IDBObjectWrapper {
+public class Album implements IMongoBean {
   /**
    * Creates a new Album wrapping the given {@link DBObject}.
    */
@@ -30,15 +26,6 @@ public class Album implements IDBObjectWrapper {
   public Album() {
     _dbObject = new BasicDBObject();
     _dbObject.put(JAVA_CLASS_KEY, "org.musicdb.Album");
-    
-  }
-  
-  /**
-   * Creates a new Album wrapping a new {@link BasicDBObject} with an Xtend friendly constructor.
-   */
-  public Album(final Procedure1<Album> initializer) {
-    this();
-    initializer.apply(this);
     
   }
   
@@ -64,11 +51,11 @@ public class Album implements IDBObjectWrapper {
      _dbObject.put("year", year);
   }
   
-  private DBObjectListWrapper<Track> _tracks;
+  private MongoBeanList<Track> _tracks;
   
   public List<Track> getTracks() {
     if(_tracks==null)
-    	_tracks = new DBObjectListWrapper<Track>(_dbObject, "tracks");
+    	_tracks = new MongoBeanList<Track>(_dbObject, "tracks");
     return _tracks;
   }
   

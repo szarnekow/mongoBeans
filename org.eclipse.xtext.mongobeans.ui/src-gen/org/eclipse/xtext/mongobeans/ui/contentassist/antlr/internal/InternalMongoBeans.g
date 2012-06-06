@@ -2149,6 +2149,28 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__MongoProperty__Alternatives_0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMongoPropertyAccess().getTypeAssignment_0_0()); }
+(rule__MongoProperty__TypeAssignment_0_0)
+{ after(grammarAccess.getMongoPropertyAccess().getTypeAssignment_0_0()); }
+)
+
+    |(
+{ before(grammarAccess.getMongoPropertyAccess().getInlineTypeAssignment_0_1()); }
+(rule__MongoProperty__InlineTypeAssignment_0_1)
+{ after(grammarAccess.getMongoPropertyAccess().getInlineTypeAssignment_0_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__XAssignment__Alternatives
     @init {
 		int stackSize = keepStackSize();
@@ -3291,11 +3313,9 @@ rule__MongoBean__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getMongoBeanAccess().getMongobeanKeyword_0()); }
-
-	'mongobean' 
-
-{ after(grammarAccess.getMongoBeanAccess().getMongobeanKeyword_0()); }
+{ before(grammarAccess.getMongoBeanAccess().getNameAssignment_0()); }
+(rule__MongoBean__NameAssignment_0)
+{ after(grammarAccess.getMongoBeanAccess().getNameAssignment_0()); }
 )
 
 ;
@@ -3322,9 +3342,11 @@ rule__MongoBean__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getMongoBeanAccess().getNameAssignment_1()); }
-(rule__MongoBean__NameAssignment_1)
-{ after(grammarAccess.getMongoBeanAccess().getNameAssignment_1()); }
+{ before(grammarAccess.getMongoBeanAccess().getLeftCurlyBracketKeyword_1()); }
+
+	'{' 
+
+{ after(grammarAccess.getMongoBeanAccess().getLeftCurlyBracketKeyword_1()); }
 )
 
 ;
@@ -3351,11 +3373,9 @@ rule__MongoBean__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getMongoBeanAccess().getLeftCurlyBracketKeyword_2()); }
-
-	'{' 
-
-{ after(grammarAccess.getMongoBeanAccess().getLeftCurlyBracketKeyword_2()); }
+{ before(grammarAccess.getMongoBeanAccess().getFeaturesAssignment_2()); }
+(rule__MongoBean__FeaturesAssignment_2)*
+{ after(grammarAccess.getMongoBeanAccess().getFeaturesAssignment_2()); }
 )
 
 ;
@@ -3370,7 +3390,6 @@ rule__MongoBean__Group__3
     }
 :
 	rule__MongoBean__Group__3__Impl
-	rule__MongoBean__Group__4
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -3382,47 +3401,17 @@ rule__MongoBean__Group__3__Impl
     }
 :
 (
-{ before(grammarAccess.getMongoBeanAccess().getFeaturesAssignment_3()); }
-(rule__MongoBean__FeaturesAssignment_3)*
-{ after(grammarAccess.getMongoBeanAccess().getFeaturesAssignment_3()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__MongoBean__Group__4
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__MongoBean__Group__4__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__MongoBean__Group__4__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getMongoBeanAccess().getRightCurlyBracketKeyword_4()); }
+{ before(grammarAccess.getMongoBeanAccess().getRightCurlyBracketKeyword_3()); }
 
 	'}' 
 
-{ after(grammarAccess.getMongoBeanAccess().getRightCurlyBracketKeyword_4()); }
+{ after(grammarAccess.getMongoBeanAccess().getRightCurlyBracketKeyword_3()); }
 )
 
 ;
 finally {
 	restoreStackSize(stackSize);
 }
-
-
 
 
 
@@ -3451,9 +3440,9 @@ rule__MongoProperty__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getMongoPropertyAccess().getTypeAssignment_0()); }
-(rule__MongoProperty__TypeAssignment_0)
-{ after(grammarAccess.getMongoPropertyAccess().getTypeAssignment_0()); }
+{ before(grammarAccess.getMongoPropertyAccess().getAlternatives_0()); }
+(rule__MongoProperty__Alternatives_0)
+{ after(grammarAccess.getMongoPropertyAccess().getAlternatives_0()); }
 )
 
 ;
@@ -14630,14 +14619,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MongoBean__NameAssignment_1
+rule__MongoBean__NameAssignment_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getMongoBeanAccess().getNameValidIDParserRuleCall_1_0()); }
-	ruleValidID{ after(grammarAccess.getMongoBeanAccess().getNameValidIDParserRuleCall_1_0()); }
+{ before(grammarAccess.getMongoBeanAccess().getNameValidIDParserRuleCall_0_0()); }
+	ruleValidID{ after(grammarAccess.getMongoBeanAccess().getNameValidIDParserRuleCall_0_0()); }
 )
 
 ;
@@ -14645,14 +14634,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MongoBean__FeaturesAssignment_3
+rule__MongoBean__FeaturesAssignment_2
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getMongoBeanAccess().getFeaturesAbstractFeatureParserRuleCall_3_0()); }
-	ruleAbstractFeature{ after(grammarAccess.getMongoBeanAccess().getFeaturesAbstractFeatureParserRuleCall_3_0()); }
+{ before(grammarAccess.getMongoBeanAccess().getFeaturesAbstractFeatureParserRuleCall_2_0()); }
+	ruleAbstractFeature{ after(grammarAccess.getMongoBeanAccess().getFeaturesAbstractFeatureParserRuleCall_2_0()); }
 )
 
 ;
@@ -14660,14 +14649,29 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MongoProperty__TypeAssignment_0
+rule__MongoProperty__TypeAssignment_0_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getMongoPropertyAccess().getTypeJvmTypeReferenceParserRuleCall_0_0()); }
-	ruleJvmTypeReference{ after(grammarAccess.getMongoPropertyAccess().getTypeJvmTypeReferenceParserRuleCall_0_0()); }
+{ before(grammarAccess.getMongoPropertyAccess().getTypeJvmTypeReferenceParserRuleCall_0_0_0()); }
+	ruleJvmTypeReference{ after(grammarAccess.getMongoPropertyAccess().getTypeJvmTypeReferenceParserRuleCall_0_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MongoProperty__InlineTypeAssignment_0_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMongoPropertyAccess().getInlineTypeMongoBeanParserRuleCall_0_1_0()); }
+	ruleMongoBean{ after(grammarAccess.getMongoPropertyAccess().getInlineTypeMongoBeanParserRuleCall_0_1_0()); }
 )
 
 ;

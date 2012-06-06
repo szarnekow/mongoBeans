@@ -54,7 +54,6 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/mongobeans/MongoBeans#//MongoBean"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="mongobean"/>
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.10"/>
         </elements>
@@ -79,8 +78,13 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/mongobeans/MongoBeans#//MongoProperty"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Assignment" feature="type" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Assignment" feature="type" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="inlineType" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+          </elements>
         </elements>
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="many" operator="?=">
           <terminal xsi:type="xtext:Keyword" value="*"/>

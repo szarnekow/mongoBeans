@@ -1013,7 +1013,7 @@ public class MongoBeansSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (type=JvmTypeReference many?='*'? name=ValidID)
+	 *     ((type=JvmTypeReference | inlineType=MongoBean) many?='*'? name=ValidID)
 	 */
 	protected void sequence_MongoProperty(EObject context, MongoProperty semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

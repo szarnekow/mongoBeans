@@ -1,52 +1,29 @@
 import java.util.*
+import org.eclipse.xtext.mongobeans.example.Duration
 
 package org.musicdb {
 	/**
 	 * A musical performer
 	 */
-	mongobean Artist {
+	Artist {
 		String name
-		Album* albums
-		
+		Album {
+			String title 
+			int year 
+			Track {
+				String title
+				int seconds
+				Duration getDuration() {
+					new Duration(seconds)
+				}
+			}* tracks	
+			Duration getDuration() {
+				tracks.map[duration].reduce[Duration a, Duration b| a + b]
+			} 
+		}* albums
 		Iterable<Track> getOevre() {
 			albums.map[tracks].flatten
 		}
 	}  
-	 
-	/**
-	 * A record, CD, DVD or another collection of tracks
-	 */
-	mongobean Album {
-		String title
-		int year 
-		Track* tracks
-		
-		Duration getDuration() {
-			tracks.map[duration].reduce[Duration a, Duration b| a + b]
-		}
-	}
-	
-	mongobean Track {
-		String title
-		Duration duration
-	}
-	
-	mongobean Duration {
-		int seconds
-	
-		void fromString(String duration) {
-			val split = duration.split(':')
-			seconds = Integer::parseInt(split.get(0)) * 60 + Integer::parseInt(split.get(1))
-		}		
-		
-		String toString() {
-			Integer::toString(seconds / 60) + ':' + Integer::toString(seconds % 60)
-		}
-		
-		Duration operator_plus(Duration other) {
-			new Duration() [
-				seconds = this.seconds + other.seconds
-			]
-		}
-	}
-} 
+
+}

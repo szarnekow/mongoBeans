@@ -17,7 +17,7 @@ PackageDeclaration:
 	'}';
 
 MongoBean:
-	'mongobean' name=ValidID '{'
+	name=ValidID '{'
 		features+=AbstractFeature*
 	'}';
 
@@ -25,7 +25,7 @@ AbstractFeature:
 	MongoOperation | MongoProperty;
 
 MongoProperty:
-	type=JvmTypeReference (many?='*')? name=ValidID;
+	(type=JvmTypeReference | inlineType=MongoBean) (many?='*')? name=ValidID;
 
 MongoOperation:
 	=>(returnType=JvmTypeReference name=ValidID '(') 

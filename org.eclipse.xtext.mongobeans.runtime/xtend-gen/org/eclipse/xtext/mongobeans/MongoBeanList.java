@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import org.eclipse.xtext.mongobeans.IDBObjectWrapper;
+import org.eclipse.xtext.mongobeans.IMongoBean;
 import org.eclipse.xtext.mongobeans.WrappingUtil;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -15,10 +15,10 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
-public class DBObjectListWrapper<T extends Object> implements List<T> {
+public class MongoBeanList<T extends Object> implements List<T> {
   private List<DBObject> delegate;
   
-  public DBObjectListWrapper(final DBObject owner, final String key) {
+  public MongoBeanList(final DBObject owner, final String key) {
     final Object value = owner.get(key);
     boolean _equals = Objects.equal(value, null);
     if (_equals) {
@@ -59,13 +59,13 @@ public class DBObjectListWrapper<T extends Object> implements List<T> {
   }
   
   public T[] toArray() {
-    final Function1<DBObject,IDBObjectWrapper> _function = new Function1<DBObject,IDBObjectWrapper>() {
-        public IDBObjectWrapper apply(final DBObject it) {
-          IDBObjectWrapper _wrap = WrappingUtil.wrap(it);
+    final Function1<DBObject,IMongoBean> _function = new Function1<DBObject,IMongoBean>() {
+        public IMongoBean apply(final DBObject it) {
+          IMongoBean _wrap = WrappingUtil.wrap(it);
           return _wrap;
         }
       };
-    List _map = ListExtensions.<DBObject, IDBObjectWrapper>map(this.delegate, _function);
+    List _map = ListExtensions.<DBObject, IMongoBean>map(this.delegate, _function);
     Object[] _array = _map.toArray();
     return ((T[]) _array);
   }

@@ -34,7 +34,7 @@ class MongoTypes {
 	}
 	
 	def isMongoBean(JvmTypeReference typeRef) {
-		typeRef.collectSuperTypeNames.contains('org.eclipse.xtext.mongobeans.IDBObjectWrapper')
+		typeRef.collectSuperTypeNames.contains('org.eclipse.xtext.mongobeans.IMongoBean')
 	}
 	
 }

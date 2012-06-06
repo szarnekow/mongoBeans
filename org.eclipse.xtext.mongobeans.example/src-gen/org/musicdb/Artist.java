@@ -4,18 +4,17 @@ import com.google.common.collect.Iterables;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import java.util.List;
-import org.eclipse.xtext.mongobeans.DBObjectListWrapper;
-import org.eclipse.xtext.mongobeans.IDBObjectWrapper;
+import org.eclipse.xtext.mongobeans.IMongoBean;
+import org.eclipse.xtext.mongobeans.MongoBeanList;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.musicdb.Album;
 import org.musicdb.Track;
 
 /**
  * A musical performer
  */
-public class Artist implements IDBObjectWrapper {
+public class Artist implements IMongoBean {
   /**
    * Creates a new Artist wrapping the given {@link DBObject}.
    */
@@ -29,15 +28,6 @@ public class Artist implements IDBObjectWrapper {
   public Artist() {
     _dbObject = new BasicDBObject();
     _dbObject.put(JAVA_CLASS_KEY, "org.musicdb.Artist");
-    
-  }
-  
-  /**
-   * Creates a new Artist wrapping a new {@link BasicDBObject} with an Xtend friendly constructor.
-   */
-  public Artist(final Procedure1<Artist> initializer) {
-    this();
-    initializer.apply(this);
     
   }
   
@@ -55,11 +45,11 @@ public class Artist implements IDBObjectWrapper {
      _dbObject.put("name", name);
   }
   
-  private DBObjectListWrapper<Album> _albums;
+  private MongoBeanList<Album> _albums;
   
   public List<Album> getAlbums() {
     if(_albums==null)
-    	_albums = new DBObjectListWrapper<Album>(_dbObject, "albums");
+    	_albums = new MongoBeanList<Album>(_dbObject, "albums");
     return _albums;
   }
   

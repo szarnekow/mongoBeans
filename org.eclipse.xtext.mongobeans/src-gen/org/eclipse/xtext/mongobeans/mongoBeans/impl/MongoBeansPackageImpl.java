@@ -309,9 +309,19 @@ public class MongoBeansPackageImpl extends EPackageImpl implements MongoBeansPac
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getMongoProperty_InlineType()
+  {
+    return (EReference)mongoPropertyEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EAttribute getMongoProperty_Many()
   {
-    return (EAttribute)mongoPropertyEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)mongoPropertyEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -405,6 +415,7 @@ public class MongoBeansPackageImpl extends EPackageImpl implements MongoBeansPac
 
     mongoPropertyEClass = createEClass(MONGO_PROPERTY);
     createEReference(mongoPropertyEClass, MONGO_PROPERTY__TYPE);
+    createEReference(mongoPropertyEClass, MONGO_PROPERTY__INLINE_TYPE);
     createEAttribute(mongoPropertyEClass, MONGO_PROPERTY__MANY);
 
     mongoOperationEClass = createEClass(MONGO_OPERATION);
@@ -474,6 +485,7 @@ public class MongoBeansPackageImpl extends EPackageImpl implements MongoBeansPac
 
     initEClass(mongoPropertyEClass, MongoProperty.class, "MongoProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMongoProperty_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, MongoProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMongoProperty_InlineType(), this.getMongoBean(), null, "inlineType", null, 0, 1, MongoProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMongoProperty_Many(), ecorePackage.getEBoolean(), "many", null, 0, 1, MongoProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(mongoOperationEClass, MongoOperation.class, "MongoOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

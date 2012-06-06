@@ -7,7 +7,7 @@ import java.util.ListIterator
 
 import static extension org.eclipse.xtext.mongobeans.WrappingUtil.*
 
-class DBObjectListWrapper <T> implements List<T> {
+class MongoBeanList <T> implements List<T> {
 	
 	List<DBObject> delegate
 	

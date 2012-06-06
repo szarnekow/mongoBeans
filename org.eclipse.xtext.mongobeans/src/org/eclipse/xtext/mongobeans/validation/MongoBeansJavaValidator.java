@@ -23,6 +23,8 @@ public class MongoBeansJavaValidator extends AbstractMongoBeansJavaValidator {
 		if(type != null) {
 			if(!mongoTypes.isMongoType(type)) 
 				error("Only MongoBeans and mappable types are allowed", MongoBeansPackage.Literals.MONGO_PROPERTY__TYPE);
+		} else if(property.getInlineType() == null) {
+			error("Type must be set", MongoBeansPackage.Literals.ABSTRACT_FEATURE__NAME);			
 		}
 	}
 

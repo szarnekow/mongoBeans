@@ -39,6 +39,7 @@ public class MongoBeansParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getAbstractElementAccess().getAlternatives(), "rule__AbstractElement__Alternatives");
 					put(grammarAccess.getAbstractFeatureAccess().getAlternatives(), "rule__AbstractFeature__Alternatives");
+					put(grammarAccess.getMongoPropertyAccess().getAlternatives_0(), "rule__MongoProperty__Alternatives_0");
 					put(grammarAccess.getXAssignmentAccess().getAlternatives(), "rule__XAssignment__Alternatives");
 					put(grammarAccess.getOpEqualityAccess().getAlternatives(), "rule__OpEquality__Alternatives");
 					put(grammarAccess.getXRelationalExpressionAccess().getAlternatives_1(), "rule__XRelationalExpression__Alternatives_1");
@@ -227,9 +228,10 @@ public class MongoBeansParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
 					put(grammarAccess.getPackageDeclarationAccess().getNameAssignment_1(), "rule__PackageDeclaration__NameAssignment_1");
 					put(grammarAccess.getPackageDeclarationAccess().getElementsAssignment_3(), "rule__PackageDeclaration__ElementsAssignment_3");
-					put(grammarAccess.getMongoBeanAccess().getNameAssignment_1(), "rule__MongoBean__NameAssignment_1");
-					put(grammarAccess.getMongoBeanAccess().getFeaturesAssignment_3(), "rule__MongoBean__FeaturesAssignment_3");
-					put(grammarAccess.getMongoPropertyAccess().getTypeAssignment_0(), "rule__MongoProperty__TypeAssignment_0");
+					put(grammarAccess.getMongoBeanAccess().getNameAssignment_0(), "rule__MongoBean__NameAssignment_0");
+					put(grammarAccess.getMongoBeanAccess().getFeaturesAssignment_2(), "rule__MongoBean__FeaturesAssignment_2");
+					put(grammarAccess.getMongoPropertyAccess().getTypeAssignment_0_0(), "rule__MongoProperty__TypeAssignment_0_0");
+					put(grammarAccess.getMongoPropertyAccess().getInlineTypeAssignment_0_1(), "rule__MongoProperty__InlineTypeAssignment_0_1");
 					put(grammarAccess.getMongoPropertyAccess().getManyAssignment_1(), "rule__MongoProperty__ManyAssignment_1");
 					put(grammarAccess.getMongoPropertyAccess().getNameAssignment_2(), "rule__MongoProperty__NameAssignment_2");
 					put(grammarAccess.getMongoOperationAccess().getReturnTypeAssignment_0_0_0(), "rule__MongoOperation__ReturnTypeAssignment_0_0_0");
